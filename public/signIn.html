@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style-form.css">
+    <title>Sign up</title>
+</head>
+<body>
+    <div class="main">
+        <form action="" method="post" class="form" id="form-1">
+            <h3 class="heading">Đăng kí</h3>
+
+            <div class="spacer"></div>
+
+            <!-- name -->
+            <div class="form-group">
+                <label for="fullName" class="form-label">Tên đầy đủ</label>
+                <input type="text" id="fullName" class="form-control" name="fullName" placeholder="VD: Thu Bùi" >
+                <span class="form-message"></span>
+            </div>
+
+            <!-- email -->
+            <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="text" id="email" class="form-control" name="email" placeholder="VD: email@gmail.com" >
+                <span class="form-message"></span>
+            </div>
+
+            <!-- mật khẩu -->
+            <div class="form-group">
+                <label for="password" class="form-label">Mật khẩu</label>
+                <input type="password" id="password" class="form-control" name="password" placeholder="Nhập mật khẩu" >
+                <span class="form-message"></span>
+            </div>
+
+            <!-- nhập lại mật khẩu -->
+            <div class="form-group">
+                <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
+                <input type="password" id="password_confirmation" class="form-control" name="password_confirmation" placeholder="Nhập lại mật khẩu" >
+                <span class="form-message"></span>
+            </div>
+
+            <button class="form-submit">Đăng ký</button>
+        </form>
+    </div>
+    <script src="../javascript/script-signIn.js"></script>
+    <script>
+
+        // Output 
+        Validator(
+            {
+            form: '#form-1',
+            errorSelector: '.form-message',
+            rules: [
+                Validator.isRequired('#fullName'),
+
+                Validator.isEmail('#email'),
+
+                Validator.minLength('#password',2),
+
+                Validator.isRequired('#password_confirmation'),
+                Validator.isConfirmed('#password_confirmation', ()=>{
+                    return document.querySelector('#form-1 #password').value;
+                }, 'Mật khẩu nhập lại không chính xác')
+
+            ],
+            onSubmit: function(data) {
+                console.log(data);
+            }
+        }
+        );
+    </script>
+</body>
+</html>
